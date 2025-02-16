@@ -1,4 +1,4 @@
-package main
+package sdkopen
 
 import (
 	"github.com/sdkopen/sdkopen-go-webserver/observer"
