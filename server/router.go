@@ -5,10 +5,10 @@ import "github.com/sdkopen/sdkopen-go-webserver/http"
 type RoutePrefix string
 
 const (
-	PublicApi        RoutePrefix = "/public/"
-	PrivateApi       RoutePrefix = "/private/"
-	AdminApi         RoutePrefix = "/admin/"
-	AuthenticatedApi RoutePrefix = "/api/"
+	PublicApi  RoutePrefix = "/public/"
+	PrivateApi RoutePrefix = "/private/"
+	AdminApi   RoutePrefix = "/admin/"
+	Api        RoutePrefix = "/api/"
 )
 
 type Route struct {
