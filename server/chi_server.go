@@ -18,7 +18,7 @@ type ChiWebServer struct {
 	wg     *sync.WaitGroup
 }
 
-func createChiServer() Server {
+func CreateChiServer() Server {
 	return &ChiWebServer{}
 }
 
