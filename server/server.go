@@ -25,7 +25,6 @@ func AddRoutes(routes []Route) {
 }
 
 func ListenAndServe() {
-
 	srv = createChiServer()
 	srv.initialize()
 	srv.injectMiddlewares()

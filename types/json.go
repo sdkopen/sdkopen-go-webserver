@@ -6,7 +6,6 @@ import (
 	"errors"
 )
 
-// JsonB for json binary field
 type JsonB map[string]interface{}
 
 func (j *JsonB) Scan(value interface{}) error {

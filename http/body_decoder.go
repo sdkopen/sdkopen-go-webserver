@@ -5,23 +5,14 @@ import (
 )
 
 type DecoderConfig struct {
-	ContentType         ContentType
-	Data                []byte
-	CSVContentSeparator rune
-}
-
-func (dc *DecoderConfig) normalize() {
-	if dc.CSVContentSeparator == 0 {
-		dc.CSVContentSeparator = ','
-	}
+	ContentType ContentType
+	Data        []byte
 }
 
 func Decoder[T any](config *DecoderConfig) (*T, error) {
 	if config == nil {
 		return nil, nil
 	}
-
-	config.normalize()
 
 	switch config.ContentType {
 	case ContentTypeJSON:
