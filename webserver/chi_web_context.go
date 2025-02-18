@@ -1,17 +1,17 @@
-package server
+package webserver
 
 import (
 	"context"
 	"encoding/json"
-	"github.com/sdkopen/sdkopen-go-webserver/validator"
+	"github.com/sdkopen/sdkopen-go-webbase/validator"
 	"io"
 	"mime/multipart"
 	netHttp "net/http"
 	"strings"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/sdkopen/sdkopen-go-webserver/http"
-	"github.com/sdkopen/sdkopen-go-webserver/logging"
+	"github.com/sdkopen/sdkopen-go-webbase/http"
+	"github.com/sdkopen/sdkopen-go-webbase/logging"
 )
 
 type chiWebContext struct {

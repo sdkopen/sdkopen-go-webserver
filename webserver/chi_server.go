@@ -1,15 +1,16 @@
-package server
+package webserver
 
 import (
 	_ "encoding/json"
 	"fmt"
+	"github.com/sdkopen/sdkopen-go-webbase/server"
 	"net/http"
 	"sync"
 
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
-	"github.com/sdkopen/sdkopen-go-webserver/logging"
-	"github.com/sdkopen/sdkopen-go-webserver/observer"
+	"github.com/sdkopen/sdkopen-go-webbase/logging"
+	"github.com/sdkopen/sdkopen-go-webbase/observer"
 )
 
 type ChiWebServer struct {
@@ -18,26 +19,26 @@ type ChiWebServer struct {
 	wg     *sync.WaitGroup
 }
 
-func CreateChiServer() Server {
+func CreateChiServer() server.Server {
 	return &ChiWebServer{}
 }
 
-func (s *ChiWebServer) initialize() {
+func (s *ChiWebServer) Initialize() {
 	s.engine = chi.NewRouter()
 	s.wg = observer.GetWaitGroup()
 }
 
-func (s *ChiWebServer) shutdown() error {
+func (s *ChiWebServer) Shutdown() error {
 	return s.srv.Close()
 }
 
-func (s *ChiWebServer) injectMiddlewares() {
+func (s *ChiWebServer) InjectMiddlewares() {
 	s.engine.Use(middleware.Recoverer)
 }
 
-func (s *ChiWebServer) injectRoutes() {
+func (s *ChiWebServer) InjectRoutes() {
 
-	for _, route := range srvRoutes {
+	for _, route := range server.SrvRoutes {
 		routeUri := string(route.Prefix) + route.URI
 		fn := route.Function
 
@@ -53,7 +54,7 @@ func (s *ChiWebServer) injectRoutes() {
 	}
 }
 
-func (s *ChiWebServer) listenAndServe() error {
+func (s *ChiWebServer) ListenAndServe() error {
 	s.srv = &http.Server{
 		Addr:    fmt.Sprintf(":%d", 8080),
 		Handler: s.engine,
