@@ -23,6 +23,14 @@ func (ctx *chiWebContext) Context() context.Context {
 	return ctx.request.Context()
 }
 
+func (ctx *chiWebContext) Response() netHttp.ResponseWriter {
+	return ctx.writer
+}
+
+func (ctx *chiWebContext) Request() *netHttp.Request {
+	return ctx.request
+}
+
 func (ctx *chiWebContext) RequestHeader(key string) []string {
 	return ctx.request.Header[key]
 }
