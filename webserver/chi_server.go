@@ -3,6 +3,7 @@ package webserver
 import (
 	_ "encoding/json"
 	"fmt"
+	"github.com/go-chi/cors"
 	"github.com/sdkopen/sdkopen-go-webbase/server"
 	"net/http"
 	"sync"
@@ -33,6 +34,14 @@ func (s *ChiWebServer) Shutdown() error {
 }
 
 func (s *ChiWebServer) InjectMiddlewares() {
+	s.engine.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: true,
+		MaxAge:           300, // tempo em segundos que a resposta de preflight pode ser cacheada
+	}))
 	s.engine.Use(middleware.Recoverer)
 }
 
